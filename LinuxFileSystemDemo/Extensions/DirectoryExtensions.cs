@@ -46,7 +46,7 @@
                 throw new ArgumentNullException(nameof(directory));
             }
 
-            if (string.IsNullOrWhiteSpace(searchPattern))
+            if (string.IsNullOrEmpty(searchPattern))
             {
                 throw new ArgumentException("Search pattern must not be null or whitespace.", nameof(searchPattern));
             }
@@ -70,7 +70,7 @@
                 throw new ArgumentNullException(nameof(directory));
             }
 
-            if (string.IsNullOrWhiteSpace(fileName))
+            if (string.IsNullOrEmpty(fileName))
             {
                 throw new ArgumentException("File name must not be null or whitespace.", nameof(fileName));
             }
@@ -86,7 +86,7 @@
                 throw new ArgumentNullException(nameof(directory));
             }
 
-            if (string.IsNullOrWhiteSpace(fileName))
+            if (string.IsNullOrEmpty(fileName))
             {
                 throw new ArgumentException("File name must not be null or whitespace.", nameof(fileName));
             }
@@ -97,7 +97,7 @@
 
         public static string ResolveDirectoryCI(this string inputPath)
         {
-            if (string.IsNullOrWhiteSpace(inputPath))
+            if (string.IsNullOrEmpty(inputPath))
                 return null;
 
             inputPath = Path.GetFullPath(inputPath); // Normalize path, important on Windows
