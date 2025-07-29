@@ -4,31 +4,11 @@
     {
         public static DirectoryInfo? GetDirCI(this string path)
         {
-            var resolvedPath = ResolvePathCI(path);
+            var resolvedPath = ResolveDirectoryCI(path);
             if (string.IsNullOrEmpty(resolvedPath) || !Directory.Exists(resolvedPath))
                 return null;
 
             return new DirectoryInfo(resolvedPath);
-        }
-
-        public static void DeleteCI(string path)
-        {
-            if (string.IsNullOrWhiteSpace(path))
-                return;
-
-            try
-            {
-                var resolvedPath = ResolvePathCI2(path);
-
-                if (!string.IsNullOrEmpty(resolvedPath) && Directory.Exists(resolvedPath))
-                {
-                    Directory.Delete(resolvedPath, true);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new IOException($"Failed to delete directory: {path}", ex);
-            }
         }
 
         public static void DeleteCI(this DirectoryInfo dir)
@@ -115,7 +95,7 @@
                 .FirstOrDefault(file => file.Name.Equals(fileName, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static string ResolvePathCI(this string inputPath)
+        public static string ResolveDirectoryCI(this string inputPath)
         {
             if (string.IsNullOrWhiteSpace(inputPath))
                 return null;
@@ -151,7 +131,6 @@
 
             return currentPath;
         }
-
 
         public static string ResolvePathCI2(this string inputPath)
         {

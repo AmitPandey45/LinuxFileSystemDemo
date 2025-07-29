@@ -63,7 +63,7 @@ namespace LinuxFileSystemDemo
             try
             {
                 string actualPath = "/app/bin/Debug/net8.0/mnt/weBvoTes".ResolvePathCI2();
-                var ddd = "/app/bin/Debug/net8.0/mnt/weBvoTes".ResolvePathCI();
+                var ddd = "/app/bin/Debug/net8.0/mnt/weBvoTes".ResolveDirectoryCI();
 
                 var directory1 = new DirectoryInfo("/app/bin/Debug/net8.0/mnt/weBvoTes");
                 var dirs = directory1.GetDirectories();
@@ -81,7 +81,7 @@ namespace LinuxFileSystemDemo
                 string path1 = "temp111111";
                 string path2 = "TEMP111111";
                 string path3 = "TeMp111111";
-                string path4 = "Temp111111";
+                string path4 = "Temp111112"; // to solve delete file because there are two folder created with same name only case sensitivity difference
 
                 Console.WriteLine("============================Started DirectoryCaseSensivityTest===================");
 
@@ -95,7 +95,7 @@ namespace LinuxFileSystemDemo
                 }
                 Directory.CreateDirectory(path1);
 
-                path2 = path2.ResolvePathCI();
+                path2 = path2.ResolveDirectoryCI();
 
                 if (Directory.Exists(path2))
                 {
@@ -107,7 +107,7 @@ namespace LinuxFileSystemDemo
                 }
                 Directory.CreateDirectory(path2);
 
-                path3 = path3.ResolvePathCI();
+                path3 = path3.ResolveDirectoryCI();
                 if (Directory.Exists(path3))
                 {
                     Console.WriteLine($"Directory '{path3}' exists.");
@@ -157,7 +157,7 @@ namespace LinuxFileSystemDemo
                 }
                 Directory.CreateDirectory(path1);
 
-                path2 = path2.ResolvePathCI();
+                path2 = path2.ResolveDirectoryCI();
                 if (Directory.Exists(path2))
                 {
                     Console.WriteLine($"Directory '{path2}' exists.");
@@ -168,7 +168,7 @@ namespace LinuxFileSystemDemo
                 }
                 Directory.CreateDirectory(path2);
 
-                path3 = path3.ResolvePathCI();
+                path3 = path3.ResolveDirectoryCI();
                 if (Directory.Exists(path3))
                 {
                     Console.WriteLine($"Directory '{path3}' exists.");
@@ -179,7 +179,7 @@ namespace LinuxFileSystemDemo
                 }
                 Directory.CreateDirectory(path3);
 
-                path4 = path4.ResolvePathCI();
+                path4 = path4.ResolveDirectoryCI();
                 if (Directory.Exists(path4))
                 {
                     Console.WriteLine($"Directory '{path4}' exists.");
@@ -213,6 +213,7 @@ namespace LinuxFileSystemDemo
                 {
                     Console.WriteLine($"Path Found {path1}");
                     this.CreateFile(dir1.FullName, "shouldbecreatedfile.txt");
+                    this.CreateFile(dir1.FullName, "createdFileToDelete.txt");
                 }
                 else
                 {
@@ -231,11 +232,35 @@ namespace LinuxFileSystemDemo
                 if (dir1 != null)
                 {
                     Console.WriteLine($"Path Found {path2}");
-                    this.CreateFile(dir1.FullName);
+                    try
+                    {
+                        this.CreateFile(dir1.FullName);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error creating file in directory {path2}: {ex.ToString()}");
+                    }
                 }
                 else
                 {
                     Console.WriteLine($"Path Not Found {path2}");
+                }
+
+                Console.WriteLine($"Started Deleting file for path {path2}");
+                var fileToDelete = Path.Combine(path2, "createdFiLeTodeLEtE.txt");
+                var resolvedDirectoryPath = path2.ResolveDirectoryCI();
+                Console.WriteLine($"Resolved Directory: {resolvedDirectoryPath}");
+                Console.WriteLine($"Resolved File Path: {fileToDelete.ResolveFilePathCI()}");
+                FileInfo file = fileToDelete.GetFileInfoCI();
+                if (file != null && file.ExistsCI())
+                {
+                    Console.WriteLine($"Deleting file: {file.FullName}");
+                    file.DeleteCI();
+                    Console.WriteLine("File deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"File not found or does not exist: {fileToDelete}");
                 }
             }
             catch (Exception ex)
