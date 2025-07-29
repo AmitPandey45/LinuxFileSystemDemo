@@ -72,5 +72,130 @@ namespace LinuxFileSystemDemo
                 Console.WriteLine($"Error accessing directory: {ex.ToString()}");
             }
         }
+
+        public void DirectoryCaseSensivityTest()
+        {
+            try
+            {
+                string path1 = "temp111111";
+                string path2 = "TEMP111111";
+                string path3 = "TeMp111111";
+                string path4 = "Temp111111";
+
+                Console.WriteLine("============================Started DirectoryCaseSensivityTest===================");
+
+                if (Directory.Exists(path1))
+                {
+                    Console.WriteLine($"Directory '{path1}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path1}' does not exist.");
+                }
+                Directory.CreateDirectory(path1);
+
+                path2 = path2.ResolvePathCI();
+
+                if (Directory.Exists(path2))
+                {
+                    Console.WriteLine($"Directory '{path2}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path2}' does not exist.");
+                }
+                Directory.CreateDirectory(path2);
+
+                path3 = path3.ResolvePathCI();
+                if (Directory.Exists(path3))
+                {
+                    Console.WriteLine($"Directory '{path3}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path3}' does not exist.");
+                }
+                Directory.CreateDirectory(path3);
+
+                if (Directory.Exists(path4))
+                {
+                    Console.WriteLine($"Directory '{path4}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path4}' does not exist.");
+                }
+                Directory.CreateDirectory(path4);
+
+                Console.WriteLine("============================Ended DirectoryCaseSensivityTest===================");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating directories: {ex.ToString()}");
+            }
+        }
+
+        public void DirectoryCaseSensivityTest2()
+        {
+            try
+            {
+                string id =  Guid.NewGuid().ToString();
+                string path1 = $"temp222222/DNC/{id}";
+                string path2 = $"TEMP222222/dnc/{id}";
+                string path3 = $"TeMp222222/Dnc/{id}";
+                string path4 = $"Temp222222/dNc/{id}";
+
+                Console.WriteLine("============================Started DirectoryCaseSensivityTest===================");
+
+                if (Directory.Exists(path1))
+                {
+                    Console.WriteLine($"Directory '{path1}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path1}' does not exist.");
+                }
+                Directory.CreateDirectory(path1);
+
+                path2 = path2.ResolvePathCI();
+                if (Directory.Exists(path2))
+                {
+                    Console.WriteLine($"Directory '{path2}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path2}' does not exist.");
+                }
+                Directory.CreateDirectory(path2);
+
+                path3 = path3.ResolvePathCI();
+                if (Directory.Exists(path3))
+                {
+                    Console.WriteLine($"Directory '{path3}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path3}' does not exist.");
+                }
+                Directory.CreateDirectory(path3);
+
+                path4 = path4.ResolvePathCI();
+                if (Directory.Exists(path4))
+                {
+                    Console.WriteLine($"Directory '{path4}' exists.");
+                }
+                else
+                {
+                    Console.WriteLine($"Directory '{path4}' does not exist.");
+                }
+                Directory.CreateDirectory(path4);
+
+                Console.WriteLine("============================Ended DirectoryCaseSensivityTest===================");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating directories: {ex.ToString()}");
+            }
+        }
     }
 }

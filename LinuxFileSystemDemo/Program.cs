@@ -4,9 +4,13 @@ using LinuxFileSystemDemo;
 Console.WriteLine("Hello, World!");
 
 var directoryDemo = new DirectoryExtensionsTests();
-directoryDemo.GetAllTextFilesByPattern();
-directoryDemo.GetAllPdfFilesByPattern();
-directoryDemo.GetDirectoryInfo();
+//directoryDemo.GetAllTextFilesByPattern();
+//directoryDemo.GetAllPdfFilesByPattern();
+//directoryDemo.GetDirectoryInfo();
 
+directoryDemo.DirectoryCaseSensivityTest();
+directoryDemo.DirectoryCaseSensivityTest2();
+
+Thread.Sleep(5 * 60 * 1000);
 Console.WriteLine("Press any key to exit...");
 Console.ReadKey();
