@@ -200,12 +200,24 @@ namespace LinuxFileSystemDemo
 
         public void GetDirectoryInfoTest()
         {
+            Console.WriteLine("============================Started GetDirectoryInfoTest===================");
+
             string path1 = "temp111111";
             string path2 = "TEMP111111";
             string path3 = "TeMp111111";
             try
             {
+                Console.WriteLine($"Getting DirectoryInfo for path {path1}");
                 var dir1 = new DirectoryInfo(path1);
+                if (dir1 != null)
+                {
+                    Console.WriteLine($"Path Found {path1}");
+                    this.CreateFile(dir1.FullName, "shouldbecreatedfile.txt");
+                }
+                else
+                {
+                    Console.WriteLine($"Path Not Found {path1}");
+                }
             }
             catch (Exception ex)
             {
@@ -214,7 +226,17 @@ namespace LinuxFileSystemDemo
 
             try
             {
+                Console.WriteLine($"Getting DirectoryInfo for path {path2}");
                 var dir1 = new DirectoryInfo(path2);
+                if (dir1 != null)
+                {
+                    Console.WriteLine($"Path Found {path2}");
+                    this.CreateFile(dir1.FullName);
+                }
+                else
+                {
+                    Console.WriteLine($"Path Not Found {path2}");
+                }
             }
             catch (Exception ex)
             {
@@ -223,7 +245,16 @@ namespace LinuxFileSystemDemo
 
             try
             {
+                Console.WriteLine($"Getting DirectoryInfo for path {path3}");
                 var dir1 = path3.GetDirCI();
+                if (dir1 != null)
+                {
+                    Console.WriteLine($"Path Found {path3}");
+                }
+                else
+                {
+                    Console.WriteLine($"Path Not Found {path3}");
+                }
             }
             catch (Exception ex)
             {
@@ -236,7 +267,16 @@ namespace LinuxFileSystemDemo
 
             try
             {
+                Console.WriteLine($"Getting DirectoryInfo for path {path11}");
                 var dir1 = new DirectoryInfo(path11);
+                if (dir1 != null)
+                {
+                    Console.WriteLine($"Path Found {path11}");
+                }
+                else
+                {
+                    Console.WriteLine($"Path Not Found {path11}");
+                }
             }
             catch (Exception ex)
             {
@@ -245,7 +285,16 @@ namespace LinuxFileSystemDemo
 
             try
             {
+                Console.WriteLine($"Getting DirectoryInfo for path {path22}");
                 var dir1 = path22.GetDirCI();
+                if (dir1 != null)
+                {
+                    Console.WriteLine($"Path Found {path22}");
+                }
+                else
+                {
+                    Console.WriteLine($"Path Not Found {path22}");
+                }
             }
             catch (Exception ex)
             {
@@ -254,12 +303,33 @@ namespace LinuxFileSystemDemo
 
             try
             {
+                Console.WriteLine($"Getting DirectoryInfo for path {path33}");
                 var dir1 = new DirectoryInfo(path33);
+                if (dir1 != null)
+                {
+                    Console.WriteLine($"Path Found {path33}");
+                    this.CreateFile(dir1.FullName);
+                }
+                else
+                {
+                    Console.WriteLine($"Path Not Found {path33}");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error accessing directory: {ex.ToString()}");
             }
+
+            Console.WriteLine("============================Started GetDirectoryInfoTest===================");
+        }
+
+        private void CreateFile(string folderPath, string fileName = "myfile.txt")
+        {
+            string filePath = Path.Combine(folderPath, fileName);
+            string content = $"Hello, this is some sample text! {filePath}";
+
+            File.WriteAllText(filePath, content);
+            Console.WriteLine("File created at: " + filePath);
         }
     }
 }
