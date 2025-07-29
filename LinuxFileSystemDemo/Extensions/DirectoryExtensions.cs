@@ -2,7 +2,7 @@
 {
     public static class DirectoryExtensions
     {
-        public static DirectoryInfo? GetDirCI(string path)
+        public static DirectoryInfo? GetDirCI(this string path)
         {
             var resolvedPath = ResolvePathCI(path);
             if (string.IsNullOrEmpty(resolvedPath) || !Directory.Exists(resolvedPath))

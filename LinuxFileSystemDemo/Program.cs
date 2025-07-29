@@ -10,6 +10,7 @@ var directoryDemo = new DirectoryExtensionsTests();
 
 directoryDemo.DirectoryCaseSensivityTest();
 directoryDemo.DirectoryCaseSensivityTest2();
+directoryDemo.GetDirectoryInfoTest();
 
 Thread.Sleep(5 * 60 * 1000);
 Console.WriteLine("Press any key to exit...");

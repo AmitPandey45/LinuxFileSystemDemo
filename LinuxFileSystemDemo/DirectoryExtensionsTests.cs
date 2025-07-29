@@ -7,6 +7,7 @@ namespace LinuxFileSystemDemo
         private readonly string basePath = AppContext.BaseDirectory;
         private readonly string textFileLocation = null;
         private readonly string pdfFileLocation = null;
+        private readonly string id = Guid.NewGuid().ToString();
 
         public DirectoryExtensionsTests()
         {
@@ -139,7 +140,6 @@ namespace LinuxFileSystemDemo
         {
             try
             {
-                string id =  Guid.NewGuid().ToString();
                 string path1 = $"temp222222/DNC/{id}";
                 string path2 = $"TEMP222222/dnc/{id}";
                 string path3 = $"TeMp222222/Dnc/{id}";
@@ -195,6 +195,70 @@ namespace LinuxFileSystemDemo
             catch (Exception ex)
             {
                 Console.WriteLine($"Error creating directories: {ex.ToString()}");
+            }
+        }
+
+        public void GetDirectoryInfoTest()
+        {
+            string path1 = "temp111111";
+            string path2 = "TEMP111111";
+            string path3 = "TeMp111111";
+            try
+            {
+                var dir1 = new DirectoryInfo(path1);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing directory: {ex.ToString()}");
+            }
+
+            try
+            {
+                var dir1 = new DirectoryInfo(path2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing directory: {ex.ToString()}");
+            }
+
+            try
+            {
+                var dir1 = path3.GetDirCI();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing directory: {ex.ToString()}");
+            }
+
+            string path11 = $"temp222222/DNC/{id}";
+            string path22 = $"TEMP222222/dnc/{id}";
+            string path33 = $"TeMp222222/Dnc/{id}";
+
+            try
+            {
+                var dir1 = new DirectoryInfo(path11);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing directory: {ex.ToString()}");
+            }
+
+            try
+            {
+                var dir1 = path22.GetDirCI();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing directory: {ex.ToString()}");
+            }
+
+            try
+            {
+                var dir1 = new DirectoryInfo(path33);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing directory: {ex.ToString()}");
             }
         }
     }
