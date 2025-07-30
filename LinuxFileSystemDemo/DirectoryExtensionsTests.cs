@@ -62,8 +62,16 @@ namespace LinuxFileSystemDemo
 
             try
             {
-                string actualPath = "/app/bin/Debug/net8.0/mnt/weBvoTes".ResolvePathCI2();
-                var ddd = "/app/bin/Debug/net8.0/mnt/weBvoTes".ResolveDirectoryCI();
+                var dir11 = "C:/MnT/wEBVotes".ResolveDirectoryCI();
+                var dir1 = new DirectoryInfo(dir11);
+                var dir1List = dir1.GetDirectories();
+
+                var dir22 = "C:/MnT/wEBVotes";
+                var dir2 = new DirectoryInfo(dir22);
+                var dir2List = dir2.GetDirectories();
+
+                string actualPath = "/bin/Debug/net8.0/mnt/weBvoTes".ResolveDirectoryCI();
+                var ddd = "/bin/Debug/net8.0/mnt/weBvoTes".ResolveDirectoryCI();
 
                 var directory1 = new DirectoryInfo("/app/bin/Debug/net8.0/mnt/weBvoTes");
                 var dirs = directory1.GetDirectories();
@@ -271,7 +279,7 @@ namespace LinuxFileSystemDemo
             try
             {
                 Console.WriteLine($"Getting DirectoryInfo for path {path3}");
-                var dir1 = path3.GetDirCI();
+                var dir1 = path3.GetDirectoryInfoCI();
                 if (dir1 != null)
                 {
                     Console.WriteLine($"Path Found {path3}");
@@ -311,7 +319,7 @@ namespace LinuxFileSystemDemo
             try
             {
                 Console.WriteLine($"Getting DirectoryInfo for path {path22}");
-                var dir1 = path22.GetDirCI();
+                var dir1 = path22.GetDirectoryInfoCI();
                 if (dir1 != null)
                 {
                     Console.WriteLine($"Path Found {path22}");

@@ -14,7 +14,8 @@ var directoryDemo = new DirectoryExtensionsTests();
 
 var fileDemo = new FileExtensionsTests();
 fileDemo.ValidateFileDemo();
-fileDemo.MountingFileDemo();
+//fileDemo.MountingFileDemo();
+fileDemo.GetBallotNumbers();
 
 Thread.Sleep(5 * 60 * 1000);
 Console.WriteLine("Press any key to exit...");

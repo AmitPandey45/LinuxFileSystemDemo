@@ -8,27 +8,36 @@
             MatchCasing matchCasing = MatchCasing.CaseInsensitive,
             bool ignoreInaccessible = false)
         {
-            if (string.IsNullOrEmpty(inputPath))
+            if (string.IsNullOrEmpty(inputPath) || string.IsNullOrWhiteSpace(inputPath))
+            {
                 return null;
+            }
 
             inputPath = Path.GetFullPath(inputPath); // Normalize
 
             var directoryPath = Path.GetDirectoryName(inputPath);
             var fileName = Path.GetFileName(inputPath);
 
-            if (string.IsNullOrEmpty(directoryPath) || string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(directoryPath) ||
+                string.IsNullOrWhiteSpace(directoryPath) ||
+                string.IsNullOrEmpty(fileName) ||
+                string.IsNullOrWhiteSpace(fileName))
+            {
                 return null;
+            }
 
             var resolvedDirectoryPath = directoryPath.ResolveDirectoryCI(); // Custom method to resolve dir CI
             if (string.IsNullOrEmpty(resolvedDirectoryPath))
+            {
                 return null;
+            }
 
             var file = new DirectoryInfo(resolvedDirectoryPath)
                 .EnumerateFiles(fileName, new EnumerationOptions
                 {
                     MatchCasing = matchCasing,
                     RecurseSubdirectories = searchOption == SearchOption.AllDirectories,
-                    IgnoreInaccessible = ignoreInaccessible
+                    IgnoreInaccessible = ignoreInaccessible,
                 })
                 .FirstOrDefault();
 
@@ -40,12 +49,16 @@
         /// </summary>
         public static FileInfo? GetFileInfoCI(this string path)
         {
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path) || string.IsNullOrWhiteSpace(path))
+            {
                 return null;
+            }
 
             var resolvedPath = path.ResolveFilePathCI();
             if (string.IsNullOrEmpty(resolvedPath) || !File.Exists(resolvedPath))
+            {
                 return null;
+            }
 
             return new FileInfo(resolvedPath);
         }
@@ -60,7 +73,9 @@
         public static bool ExistsCI(this FileInfo file)
         {
             if (file == null)
+            {
                 throw new ArgumentNullException(nameof(file));
+            }
 
             return File.Exists(file.FullName);
         }
@@ -75,7 +90,9 @@
         public static void DeleteCI(this FileInfo file)
         {
             if (file == null)
+            {
                 throw new ArgumentNullException(nameof(file));
+            }
 
             File.Delete(file.FullName);
         }
