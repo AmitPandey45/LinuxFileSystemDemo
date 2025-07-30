@@ -8,9 +8,13 @@ var directoryDemo = new DirectoryExtensionsTests();
 //directoryDemo.GetAllPdfFilesByPattern();
 //directoryDemo.GetDirectoryInfo();
 
-directoryDemo.DirectoryCaseSensivityTest();
-directoryDemo.DirectoryCaseSensivityTest2();
-directoryDemo.GetDirectoryInfoTest();
+//directoryDemo.DirectoryCaseSensivityTest();
+//directoryDemo.DirectoryCaseSensivityTest2();
+//directoryDemo.GetDirectoryInfoTest();
+
+var fileDemo = new FileExtensionsTests();
+fileDemo.ValidateFileDemo();
+fileDemo.MountingFileDemo();
 
 Thread.Sleep(5 * 60 * 1000);
 Console.WriteLine("Press any key to exit...");
